@@ -15,6 +15,7 @@
     <ImageView
         android:id="@+id/main_item_icon"
         android:layout_width="80dp"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp"
+        android:src="@drawable/dart_pan"/>
 
 </LinearLayout>
