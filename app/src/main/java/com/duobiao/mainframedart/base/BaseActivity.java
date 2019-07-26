@@ -12,13 +12,23 @@ import butterknife.ButterKnife;
  * Time:2019/7/26 16:23
  * 描述：
  */
-public class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int viewId = getContentView();
+        if (viewId > 0){
+            setContentView(viewId);
+            //绑定初始化ButterKnife
+            ButterKnife.bind(this);
+            initView();
+            initListener();
+        }
 
     }
-
+    protected abstract  int getContentView();
+    protected abstract  void initView();
+    protected abstract  void initListener();
     @Override
     protected void onDestroy() {
         super.onDestroy();

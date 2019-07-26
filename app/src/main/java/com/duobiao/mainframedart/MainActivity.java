@@ -16,8 +16,6 @@ import com.duobiao.mainframedart.view.MainItemView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import butterknife.ButterKnife;
-
 public class MainActivity extends BaseActivity implements View.OnClickListener, PermissionInterface {
     private MainItemView item_local_game,item_net_game,item_match_game,item_square_game,item_mall_game,item_setting_game;
     private PermissionHelper mPermissionHelper;
@@ -26,14 +24,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //绑定初始化ButterKnife
-        ButterKnife.bind(this);
-        initView();
-        initListener();
     }
 
-    private void initView(){
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
+    }
+
+    protected void initView(){
         //加载蓝牙数据
         BLEUUIDObj();
         item_local_game = findViewById(R.id.item_local_game);
@@ -60,7 +58,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
-    private void initListener(){
+    protected void initListener(){
         item_local_game.setOnClickListener(this);
     }
 
