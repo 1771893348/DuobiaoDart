@@ -8,9 +8,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.duobiao.mainframedart.ble.activity.NewBleActivity;
+import com.duobiao.mainframedart.ble.kit.BluetoothUtil;
 import com.duobiao.mainframedart.permission.PermissionHelper;
 import com.duobiao.mainframedart.permission.PermissionInterface;
 import com.duobiao.mainframedart.view.MainItemView;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, PermissionInterface {
     private MainItemView item_local_game,item_net_game,item_match_game,item_square_game,item_mall_game,item_setting_game;
@@ -25,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView(){
-
+        //加载蓝牙数据
+        BLEUUIDObj();
         item_local_game = findViewById(R.id.item_local_game);
         item_net_game = findViewById(R.id.item_net_game);
         item_match_game = findViewById(R.id.item_match_game);
@@ -60,6 +65,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setClass(MainActivity.this, NewBleActivity.class);
                 startActivity(intent);
                 break;
+        }
+    }
+    public void BLEUUIDObj() {
+        try {
+            InputStreamReader isr = new InputStreamReader(this.getAssets().open("main.json"), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            StringBuilder builders = new StringBuilder();
+            while ((line = br.readLine()) != null) {
+                builders.append(line);
+            }
+            br.close();
+            isr.close();
+            BluetoothUtil.initBlueConfig(builders.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
         }
     }
     @Override
