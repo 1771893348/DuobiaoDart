@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.duobiao.mainframedart.base.BaseActivity;
 import com.duobiao.mainframedart.ble.activity.NewBleActivity;
 import com.duobiao.mainframedart.ble.kit.BluetoothUtil;
+import com.duobiao.mainframedart.game.local.LocalMainActivity;
 import com.duobiao.mainframedart.permission.PermissionHelper;
 import com.duobiao.mainframedart.permission.PermissionInterface;
 import com.duobiao.mainframedart.view.MainItemView;
@@ -16,9 +16,10 @@ import com.duobiao.mainframedart.view.MainItemView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, PermissionInterface {
+public class MainActivity extends BaseActivity implements View.OnClickListener, PermissionInterface {
     private MainItemView item_local_game,item_net_game,item_match_game,item_square_game,item_mall_game,item_setting_game;
     private PermissionHelper mPermissionHelper;
+//    private RecyclerView main_page_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         item_mall_game.setMain_item_name("商城");
         item_setting_game.setMain_item_name("设置");
 
+
+
         mPermissionHelper = new PermissionHelper(this, this);
         mPermissionHelper.requestPermissions();
 
@@ -54,15 +57,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initListener(){
-        item_local_game.setOnClickListener(this);
+//        item_local_game.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.item_local_game:
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, NewBleActivity.class);
+//                startActivity(intent);
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, NewBleActivity.class);
+                intent.setClass(MainActivity.this, LocalMainActivity.class);
                 startActivity(intent);
                 break;
         }

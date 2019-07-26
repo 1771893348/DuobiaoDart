@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DuobiaoDart</string>
+    <string name="local_game_name">本地游戏</string>
 </resources>

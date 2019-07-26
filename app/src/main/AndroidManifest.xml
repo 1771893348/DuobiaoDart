@@ -22,7 +22,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:name=".DartApplication">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +31,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ble.activity.NewBleActivity"
+        <activity
+            android:name=".ble.activity.NewBleActivity"
             android:theme="@style/dialog"
-            ></activity>
+            >
+
+        </activity>
+        <activity
+            android:name=".game.local.LocalMainActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>
