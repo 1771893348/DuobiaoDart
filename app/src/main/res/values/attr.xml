@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ldp_dart_view">
+        <attr name="ldp_dart_outer_color" format="color"/><!--外圈颜色-->
+        <attr name="ldp_dart_outer_point1_color" format="color"/><!--点颜色-->
+        <attr name="ldp_dart_outer_point2_color" format="color"/><!--点颜色-->
+        <attr name="ldp_dart_line_color" format="color"/><!--分割线颜色-->
+        <attr name="ldp_dart_1_3_color" format="color"/><!--1分3倍区的颜色-->
+        <attr name="ldp_dart_2_3_color" format="color"/><!--2分3倍区的颜色-->
+        <attr name="ldp_dart_1_1_color" format="color"/><!--1分1倍区的颜色-->
+        <attr name="ldp_dart_2_1_color" format="color"/><!--2分1倍区的颜色-->
+        <attr name="ldp_dart_text_size" format="dimension"/><!--文字大小-->
+        <attr name="ldp_dart_text_color" format="color"/><!--文字颜色-->
+        <attr name="ldp_dart_scale_size" format="float"/><!--第一圈缩放比例  0～1-->
+        <attr name="ldp_dart_margin_top" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ldp_dart_title_view">
+        <attr name="ldp_dart_title_offset_height" format="dimension"/><!--高度偏移量 = ldp_dart_margin_top-->
+        <attr name="ldp_dart_title_border_color" format="color"/><!--边框颜色-->
+        <attr name="ldp_dart_title_bg_color" format="color"/><!--主背景-->
+        <attr name="ldp_dart_title_point1_color" format="color"/><!--点颜色-->
+        <attr name="ldp_dart_title_point2_color" format="color"/><!--点颜色-->
+        <attr name="ldp_dart_title_text_color" format="color"/><!--标题颜色-->
+        <attr name="ldp_dart_title_text_size" format="dimension"/><!--标题文字大小-->
+    </declare-styleable>
+
+    <attr name="buttonBarButtonStyle" format="reference" />
+    <attr name="actionBarTabBarStyle" format="reference" />
+    <!--<attr name="actionBarSize" format="dimension">-->
+    <!--<enum name="wrap_content" value="0" />-->
+    <!--</attr>-->
+    <attr name="HorizontalProgresUnReachHeight" format="dimension"></attr>
+    <attr name="HorizontalProgresReachColor" format="color"></attr>
+    <attr name="HorizontalProgresUnReachColor" format="color"></attr>
+
+    <attr name="HorizontalProgresReachHeight" format="dimension"></attr>
+    <attr name="HorizontalProgresTextColor" format="color"></attr>
+    <attr name="HorizontalProgresTextSize" format="dimension"></attr>
+    <attr name="HorizontalProgresTextOffset" format="dimension"></attr>
+
+    <declare-styleable name="CustomHorizontalProgresStyle">
+        <attr name="HorizontalProgresUnReachColor" ></attr>
+        <attr name="HorizontalProgresUnReachHeight" ></attr>
+        <attr name="HorizontalProgresReachColor" ></attr>
+        <attr name="HorizontalProgresReachHeight" ></attr>
+        <attr name="HorizontalProgresTextColor" ></attr>
+        <attr name="HorizontalProgresTextSize" ></attr>
+        <attr name="HorizontalProgresTextOffset"></attr>
+
+    </declare-styleable>
+    <declare-styleable name="PercentProgressBar">
+        <attr name="progressWidth" format="dimension"/><!--进度条宽度-->
+        <attr name="progressBackColor" format="color"/><!--进度条背景色-->
+        <attr name="progressFrontColor" format="color"/><!--进度条前景色-->
+        <attr name="percentTextSize" format="dimension"/><!--百分比文字的大小-->
+        <attr name="percentTextColor" format="color"/><!--百分比文字的颜色-->
+    </declare-styleable>
+    <declare-styleable name="SwitchButton">
+        <attr name="onDrawable" format="reference" />
+        <attr name="offDrawable" format="reference" />
+        <attr name="thumbDrawable" format="reference" />
+        <attr name="thumb_margin" format="dimension|reference" />
+        <attr name="thumb_marginTop" format="dimension|reference" />
+        <attr name="thumb_marginBottom" format="dimension|reference" />
+        <attr name="thumb_marginLeft" format="dimension|reference" />
+        <attr name="thumb_marginRight" format="dimension|reference" />
+        <attr name="thumb_width" format="dimension|reference" />
+        <attr name="thumb_height" format="dimension|reference" />
+        <attr name="onColor" format="color|reference" />
+        <attr name="offColor" format="color|reference" />
+        <attr name="thumbColor" format="color|reference" />
+        <attr name="thumbPressedColor" format="color|reference" />
+        <attr name="animationVelocity" format="integer" />
+        <attr name="radius" format="integer" />
+        <attr name="measureFactor" format="float" />
+        <attr name="insetLeft" format="dimension|reference" />
+        <attr name="insetRight" format="dimension|reference" />
+        <attr name="insetTop" format="dimension|reference" />
+        <attr name="insetBottom" format="dimension|reference" />
+    </declare-styleable>
+    <declare-styleable name="RoundImageViewByXfermode">
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+            <enum name="square" value="2" />
+        </attr>
+        <attr name="borderRadius" format="reference|dimension" />
+        <attr name="driverRadius" format="reference|dimension" />
+        <attr name="driverColor" format="color|reference" />
+    </declare-styleable>
+    <declare-styleable name="RoundImageViewWithTextByXfermode">
+        <attr name="bottominfo" format="reference|string"></attr>
+    </declare-styleable>
+
+    <!--自定义颜色渐变progressBar-->
+    <declare-styleable name="gradient_progressBar">
+        <attr name="startColor" format="color"></attr>
+        <attr name="endColor" format="color"></attr>
+        <attr name="bgColor" format="color"></attr>
+        <attr name="speed"></attr>
+        <attr name="strokeWidth" format="dimension"></attr>
+    </declare-styleable>
+
+    <!--自定义圆形view-->
+    <declare-styleable name="circle_view">
+        <attr name="textSize" format="dimension"></attr>
+        <attr name="text" format="string"></attr>
+        <attr name="textColor" format="color"></attr>
+        <attr name="stokeColor" format="color"></attr>
+        <attr name="bgColor"></attr>
+    </declare-styleable>
+
+    <!--<declare-styleable name="RippleView">-->
+    <!--<attr name="rv_alpha" format="integer" />-->
+    <!--<attr name="rv_framerate" format="integer" />-->
+    <!--<attr name="rv_rippleDuration" format="integer" />-->
+    <!--<attr name="rv_zoomDuration" format="integer" />-->
+    <!--<attr name="rv_color" format="color" />-->
+    <!--<attr name="rv_centered" format="boolean" />-->
+    <!--<attr name="rv_type" format="enum">-->
+    <!--<enum name="simpleRipple" value="0" />-->
+    <!--<enum name="doubleRipple" value="1" />-->
+    <!--<enum name="rectangle" value="2" />-->
+    <!--</attr>-->
+    <!--<attr name="rv_ripplePadding" format="dimension" />-->
+    <!--<attr name="rv_zoom" format="boolean" />-->
+    <!--<attr name="rv_zoomScale"/>-->
+    <!--</declare-styleable>-->
+    <declare-styleable name="CacheImageView">
+        <attr name="imagename" format="string" />
+    </declare-styleable>
+
+    <!--<declare-styleable name="CacheLinearLayout">-->
+    <!--<attr name="linearbgname" />-->
+    <!--</declare-styleable>-->
+
+    <declare-styleable name="CacheRelativeLayout">
+        <attr name="relativebgname" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="PayPlayerView">
+        <attr name="lppbg" format="reference" />
+        <attr name="ippbg" format="reference" />
+        <attr name="fppmbg" format="reference" />
+        <attr name="tppnbg" format="reference" />
+        <attr name="tppntextsize" format="reference" />
+        <attr name="tppctext" format="string" />
+        <attr name="tppctextsize" format="reference" />
+        <attr name="tppctextcolor" format="reference" />
+        <attr name="tppltext" format="string" />
+        <attr name="tppltextsize" format="reference" />
+        <attr name="tppltextcolor" format="reference" />
+        <attr name="lppfbg" format="reference" />
+        <attr name="playername" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="StatsPlayerView">
+        <attr name="stbbg" format="reference" />
+        <attr name="sphbg" format="reference" />
+        <attr name="sprbg" format="reference" />
+        <attr name="spabg" format="reference" />
+        <attr name="text_size" format="reference" />
+        <attr name="text_color" format="reference" />
+        <attr name="vs_visibility" format="boolean" />
+        <attr name="statsplayername" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="FirstPlayerView">
+        <attr name="lfsbg" format="reference" />
+        <attr name="ifibg" format="reference" />
+        <attr name="lpbg" format="reference" />
+        <attr name="ifphbg" format="reference" />
+        <attr name="tfpntextsize" format="reference" />
+        <attr name="tfpntextcolor" format="reference" />
+        <attr name="fs_visibility" format="boolean" />
+        <attr name="firstplayername" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="GamePlayerView">
+        <attr name="cardbg" format="reference" />
+        <attr name="textcolor" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="OptionsTextView">
+        <attr name="index" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="LightMove">
+        <attr name="x_axis" format="reference" />
+        <attr name="y_axis" format="reference" />
+        <attr name="speed" format="integer" />
+        <attr name="drawableId" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="FrameAnim">
+        <attr name="drawableIds" format="reference" />
+        <attr name="duration" format="integer" />
+        <attr name="oneshot" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="GifTextureView">
+        <attr name="gifSource" format="reference|string" />
+        <attr name="isOpaque" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="GifView">
+        <attr name="freezesAnimation" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SwitchView">
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+
+        <attr name="offColorDark" format="color" />
+        <attr name="shadowColor" format="color" />
+        <attr name="ratioAspect" format="float" />
+        <attr name="isOpened" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="GifViews">
+        <attr name="gif" format="reference" />
+        <attr name="paused" format="boolean" />
+    </declare-styleable>
+
+     <!-- 自定义控件的名称 -->  
+        
+    <declare-styleable name="StrokeTextView">  
+        <!-- 自定义的属性名称 和对应的单位 -->  
+        <attr name="outerColor" format="color|reference" />  
+        <attr name="innnerColor" format="color|reference" />  
+            
+    </declare-styleable>
+      
+    <!--<attr name="offColor" format="color"/>-->
+    <declare-styleable name="ShiftyTextview">
+        <!--动画时间-->
+        <attr name="duration"  ></attr>
+        <!--最小的数，小于这个数没有动画，默认为0.1-->
+        <attr name="minNum" format="float"></attr>
+        <!--动画开始的数-->
+        <attr name="numStart" format="string|reference"></attr>
+        <!--动画最后的数-->
+        <attr name="numEnd" format="string|reference"></attr>
+        <!--前缀-->
+        <attr name="prefixString" format="string|reference"></attr>
+        <!--后缀-->
+        <attr name="postfixString" format="string|reference"></attr>
+        <!--是否使用动画-->
+        <attr name="isEnableAnim" format="boolean"></attr>
+        <!--是否使用每三位数字一个逗号-->
+        <attr name="useCommaFormat" format="boolean"></attr>
+        <!--是否当内容改变的时候使用动画，不改变则不使用动画-->
+        <attr name="runWhenChange" format="boolean"></attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="MyProgressBar">
+
+    <attr name="progress" format="integer"/>
+
+    <attr name="max" format="integer"/>
+
+
+    <attr name="types">
+
+    <enum name="NORMAL_TYPE" value="1"/>
+
+    <enum name="ALERT_TYPE" value="2"/>
+
+</attr>
+
+</declare-styleable>
+</resources>

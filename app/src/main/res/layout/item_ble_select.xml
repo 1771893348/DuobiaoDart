@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="@dimen/margin_5"
+    >
+    <!--userAdapter的父布局  展示附近的人-->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_5"
+        android:src="@drawable/icon_blu" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center|right"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/ble_scan_select_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="dkhhsldhf "
+            android:textSize="@dimen/margin_12"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/ble_scan_select_ass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="dkhhsldhf "
+            android:textSize="@dimen/margin_10"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
