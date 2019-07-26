@@ -9,6 +9,7 @@ import com.duobiao.mainframedart.R;
 import com.duobiao.mainframedart.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -18,13 +19,16 @@ import butterknife.OnClick;
  */
 public class LocalMainActivity extends BaseActivity {
     @BindView(R.id.top_title_back)
-    private ImageView top_title_back;
+    ImageView top_title_back;
     @BindView(R.id.top_title_setting)
-    private ImageView top_title_setting;
+    ImageView top_title_setting;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_local_main);
+        //绑定初始化ButterKnife
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -43,12 +47,12 @@ public class LocalMainActivity extends BaseActivity {
     }
 
     @OnClick(R.id.top_title_back)
-    private void onBack(){
+    public void onLocalBack(){
         LocalMainActivity.this.finish();
     }
 
     @OnClick(R.id.top_title_setting)
-    private void onGoSetting(){
+    public void onGoSetting(){
 
     }
 }
