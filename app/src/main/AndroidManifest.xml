@@ -47,6 +47,11 @@
             android:screenOrientation="landscape">
 
         </activity>
+        <activity
+            android:name=".game.local.hightscore.HightGameActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>

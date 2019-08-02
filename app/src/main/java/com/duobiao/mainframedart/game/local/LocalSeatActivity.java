@@ -1,7 +1,10 @@
 package com.duobiao.mainframedart.game.local;
 
+import android.content.Intent;
+
 import com.duobiao.mainframedart.R;
 import com.duobiao.mainframedart.base.BaseActivity;
+import com.duobiao.mainframedart.game.local.hightscore.HightGameActivity;
 
 import butterknife.OnClick;
 
@@ -29,8 +32,10 @@ public class LocalSeatActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_go_game)
-    private void goPlayGame(){
-
+    public void goPlayGame(){
+        Intent intent = new Intent();
+        intent.setClass(this, HightGameActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.duobiao.mainframedart.game.local;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -65,6 +66,8 @@ public class LocalMainActivity extends BaseActivity {
 
     @OnClick(R.id.top_title_setting)
     public void onGoSetting(){
-
+        Intent intent = new Intent();
+        intent.setClass(this,LocalSeatActivity.class);
+        startActivity(intent);
     }
 }
