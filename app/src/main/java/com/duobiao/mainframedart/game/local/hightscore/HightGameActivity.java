@@ -89,7 +89,7 @@ public class HightGameActivity extends BaseGameActivity implements HightGameCont
             DartBean[] dartBeans = roundDarts.getRoundDarts();
             for (int j=0;j<dartBeans.length;j++){
                 if (null != dartBeans[j]){
-                    sb.append(dartBeans[j].getAreaMark()+" ");
+                    sb.append(dartBeans[j].getDartShow()+" ");
                 }
             }
             sb.append("\n");
