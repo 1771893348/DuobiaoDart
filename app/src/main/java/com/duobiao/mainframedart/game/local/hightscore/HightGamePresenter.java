@@ -38,10 +38,10 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
     public void onCreate() {
         playerBeans = new PlayerBean[2];
         PlayerBean playerBean = new PlayerBean();
-        playerBean.setPlayerName("wgw");
+        playerBean.setPlayerName("wgw1");
         playerBeans[0] = playerBean;
         PlayerBean playerBean1 = new PlayerBean();
-        playerBean1.setPlayerName("wgw");
+        playerBean1.setPlayerName("wgw2");
         playerBeans[1] = playerBean1;
         NewBluetoothLe.getInstance(mActivity).addBleStatusListener(this);
         if (NewBluetoothLe.getInstance(mActivity).isConnect()) {
@@ -69,21 +69,26 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
 
     @Override
     public void getBluetoothData(String message) {
+
+        DartBean dartBean = LocalGameManager.createFromByte(message);
         if (currentDartIndex>=3){
             currentDartIndex = 0;
-            currentRoundDarts = new RoundDarts();
             if (currentPlayerIndex >=playerBeans.length-1){
                 currentRoundIndex++;
+                currentPlayerIndex = 0;
             }else {
                 currentPlayerIndex++;
             }
         }else {
 
         }
-        DartBean dartBean = LocalGameManager.createFromByte(message);
+        if (currentDartIndex == 0){
+            currentRoundDarts = new RoundDarts();
+            playerBeans[currentPlayerIndex].addRound(currentRoundDarts);
+        }
         currentRoundDarts.getRoundDarts()[currentDartIndex] = dartBean;
         currentDartIndex++;
-
+        mIView.showResult(playerBeans[currentPlayerIndex]);
     }
 
     @Override

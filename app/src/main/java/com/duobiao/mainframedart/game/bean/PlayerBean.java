@@ -53,4 +53,7 @@ public class PlayerBean {
     public void setRounds(ArrayList<RoundDarts> rounds) {
         this.rounds = rounds;
     }
+    public void addRound(RoundDarts rounds){
+        this.rounds.add(rounds);
+    }
 }

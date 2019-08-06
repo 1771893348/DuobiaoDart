@@ -2,6 +2,7 @@ package com.duobiao.mainframedart.game.local.hightscore;
 
 import com.duobiao.mainframedart.game.base.IBasePresenter;
 import com.duobiao.mainframedart.game.base.IBaseView;
+import com.duobiao.mainframedart.game.bean.PlayerBean;
 
 /**
  * Author:Admin
@@ -14,6 +15,6 @@ public class HightGameContract  {
     }
     public interface view<T> extends IBaseView {
         void setPresenter(T presenter);
-
+        void showResult(PlayerBean playerBean);
     }
 }
