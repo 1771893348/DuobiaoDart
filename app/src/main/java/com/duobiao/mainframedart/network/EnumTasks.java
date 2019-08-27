@@ -9,7 +9,6 @@ import com.duobiao.mainframedart.network.msg.H8FileUploadMessage;
 import com.duobiao.mainframedart.network.msg.H8HttpMessage;
 
 import java.util.HashMap;
-import ty.duobiao.dartscool.protocol.messageproxy.DHMessage;
 
 /**
  * API枚举集合体，负责创建Http消息
