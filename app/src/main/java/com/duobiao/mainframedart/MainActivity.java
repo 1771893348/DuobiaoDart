@@ -1,9 +1,11 @@
 package com.duobiao.mainframedart;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.duobiao.mainframedart.base.BaseActivity;
 import com.duobiao.mainframedart.ble.activity.NewBleActivity;
@@ -11,6 +13,8 @@ import com.duobiao.mainframedart.ble.kit.BluetoothUtil;
 import com.duobiao.mainframedart.game.local.LocalMainActivity;
 import com.duobiao.mainframedart.permission.PermissionHelper;
 import com.duobiao.mainframedart.permission.PermissionInterface;
+import com.duobiao.mainframedart.util.Bugs;
+import com.duobiao.mainframedart.util.ToastUtil;
 import com.duobiao.mainframedart.view.MainItemView;
 
 import java.io.BufferedReader;
@@ -20,10 +24,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private MainItemView item_local_game,item_net_game,item_match_game,item_square_game,item_mall_game,item_setting_game;
     private PermissionHelper mPermissionHelper;
 //    private RecyclerView main_page_list;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
     }
 
     @Override
@@ -72,6 +78,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, LocalMainActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.item_net_game:
+                ToastUtil.makeText(mContext, Bugs.getBugs(), Toast.LENGTH_LONG).show();
                 break;
         }
     }

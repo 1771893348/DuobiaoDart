@@ -1,10 +1,15 @@
 package com.duobiao.mainframedart;
 
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 import com.clj.fastble.BleManager;
 import com.clj.fastble.scan.BleScanRuleConfig;
 import com.duobiao.mainframedart.ble.kit.NewBluetoothLe;
+import com.duobiao.mainframedart.util.HotFixEngine;
+
+import java.io.File;
 
 /**
  * Author:Admin
@@ -12,6 +17,7 @@ import com.duobiao.mainframedart.ble.kit.NewBluetoothLe;
  * 描述：
  */
 public class DartApplication extends Application {
+    public static final String FIX_DEX_PATH="";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,5 +28,20 @@ public class DartApplication extends Application {
                 .build();
         BleManager.getInstance().initScanRule(scanRuleConfig);
         NewBluetoothLe.getInstance(getApplicationContext());
+        copyDexFileToAppAndFix(this,"path.dex");
+        loadAllDex();
+    }
+
+    private void loadAllDex() {
+        File dexFilePath = getDir(FIX_DEX_PATH, Context.MODE_PRIVATE);
+        for (File dexFile:dexFilePath.listFiles()) {
+            Log.d("wgw_=====>",dexFile.getAbsolutePath());
+            if (dexFile.getAbsolutePath().endsWith("dex")){
+                new HotFixEngine().loadDex(this,dexFile);
+            }
+        }
+    }
+
+    private void copyDexFileToAppAndFix(DartApplication dartApplication, String s) {
     }
 }
