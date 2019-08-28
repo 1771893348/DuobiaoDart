@@ -1,8 +1,11 @@
 package com.duobiao.mainframedart;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.clj.fastble.BleManager;
 import com.clj.fastble.scan.BleScanRuleConfig;
@@ -10,6 +13,9 @@ import com.duobiao.mainframedart.ble.kit.NewBluetoothLe;
 import com.duobiao.mainframedart.util.HotFixEngine;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 /**
  * Author:Admin
@@ -17,7 +23,7 @@ import java.io.File;
  * 描述：
  */
 public class DartApplication extends Application {
-    public static final String FIX_DEX_PATH="";
+    public static final String FIX_DEX_PATH="wgw";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,6 +38,9 @@ public class DartApplication extends Application {
         loadAllDex();
     }
 
+    /**
+     * 用下载的dex文件，修复app
+     */
     private void loadAllDex() {
         File dexFilePath = getDir(FIX_DEX_PATH, Context.MODE_PRIVATE);
         for (File dexFile:dexFilePath.listFiles()) {
@@ -42,6 +51,54 @@ public class DartApplication extends Application {
         }
     }
 
-    private void copyDexFileToAppAndFix(DartApplication dartApplication, String s) {
+    @SuppressLint("LongLogTag")
+    private void copyDexFileToAppAndFix(Context context, String dexFileName) {
+        File path = new File(Environment.getExternalStorageDirectory(),dexFileName);
+        Log.d("wgw_copyDexFileToAppAndFix","---"+path.getAbsolutePath());
+        if (!path.exists()){
+            Toast.makeText(context,"no found file",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!path.getAbsolutePath().endsWith("dex")){
+            Toast.makeText(context,"file is wrong",Toast.LENGTH_LONG).show();
+            return;
+        }
+        File dexFilePath = context.getDir(FIX_DEX_PATH,Context.MODE_PRIVATE);
+        File dexFile = new File(dexFilePath,dexFileName);
+        if (dexFile.exists()){
+            dexFile.delete();
+        }
+        InputStream is = null;
+        FileOutputStream os = null;
+        try{
+            is = new FileInputStream(path);
+            os = new FileOutputStream(dexFile);
+            int len = 0;
+            byte[] buffer = new byte[1024];
+            while((len = is.read(buffer)) != -1){
+                os.write(buffer,0,len);
+            }
+            path.delete();//删除sdcard中的补丁文件，或者你可以直接下载到app的路径中
+            is.close();
+            os.close();
+        } catch (Exception e){
+            e.printStackTrace();
+            Log.d("wgw_=====>",e.getMessage());
+        } finally {
+            if (is != null){
+                try{
+                    is.close();
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+            if (os != null){
+                try{
+                    os.close();
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

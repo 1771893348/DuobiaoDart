@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     protected void initListener(){
         item_local_game.setOnClickListener(this);
+        item_net_game.setOnClickListener(this);
     }
 
     @Override

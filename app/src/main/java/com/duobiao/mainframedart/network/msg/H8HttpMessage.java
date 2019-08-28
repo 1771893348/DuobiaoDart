@@ -40,9 +40,9 @@ public class H8HttpMessage extends AbsMessage {
             params = new HashMap<String, String>();
         }
         String verify = "verify";
-        if (!TextUtils.isEmpty(verify) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_LOGIN_) && !TextUtils.equals(message.path, DHMessage.PATH__SYSTEM_CHECK_VERSION) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_MOBCODE_) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_MOBCODEEX_) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_PSWDRESET_)) {
-            params.put(HTTP_KEY_VERIFY, verify);
-        }
+//        if (!TextUtils.isEmpty(verify) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_LOGIN_) && !TextUtils.equals(message.path, DHMessage.PATH__SYSTEM_CHECK_VERSION) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_MOBCODE_) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_MOBCODEEX_) && !TextUtils.equals(message.path, DHMessage.PATH__ACCOUNT_PSWDRESET_)) {
+//            params.put(HTTP_KEY_VERIFY, verify);
+//        }
         params.put(HTTP_KEY_VERSION, "1.0.0");///
         message.apiParams = params;
         message.method = method;
