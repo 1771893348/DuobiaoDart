@@ -1,5 +1,15 @@
 package com.duobiao.mainframedart.network.okhttp;
 
+
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -8,6 +18,9 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -122,7 +135,206 @@ public class HttpUtil {
         Response response = call.execute();
         return response;
     }
-//    private Response onSyncPOST_BodyAndHeader(String url,Map<String ,String> map){
-//
-//    }
+    private Headers getRequestHeaders(Map<String, String> headersParams) {
+        Headers headers = null;
+        Headers.Builder builder = new Headers.Builder();
+        if (headersParams != null){
+            Iterator<String> iterator = headersParams.keySet().iterator();
+            while (iterator.hasNext()){
+                String key = iterator.next();
+                builder.add(key,headersParams.get(key));
+            }
+        }
+        headers = builder.build();
+        return headers;
+    }
+    /**
+     * 同步POST请求 有 headers
+     * @param url
+     * @param bodyParams
+     * @return
+     */
+    private Response onSyncPOST_BodyAndHeader(String url,Map<String ,String> bodyParam,Map<String, String > headersParams) throws IOException{
+            RequestBody body = getBodyParams(bodyParam);
+            Request.Builder builder = new Request.Builder();
+            Request request = builder.post(body)
+                    .headers(getRequestHeaders(headersParams))
+                    .url(url)
+                    .build();
+            Call call = mOkHttpClient.newCall(request);
+            Response response = call.execute();
+            return response;
+    }
+
+    /**
+     * 异步post请求 无 headers
+     * @param url
+     * @param bodyParams
+     */
+    private void onAsyncPOST_Body(String url,Map<String,String> bodyParams,NetCallBack netCallBack){
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.post(getBodyParams(bodyParams))
+                .url(url)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                netCallBack.onFailure(e.getMessage().toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                netCallBack.onSucceed(response);
+            }
+        });
+    }
+    /**
+     * 异步post请求 有 headers
+     * @param url
+     * @param bodyParams
+     */
+    private void onAsyncPOST_BodyAndHeaders(String url,Map<String,String> bodyParams,Map<String,String> headerParams,NetCallBack netCallBack){
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.post(getBodyParams(bodyParams))
+                .headers(getRequestHeaders(headerParams))
+                .url(url)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                netCallBack.onFailure(e.getMessage().toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                netCallBack.onSucceed(response);
+            }
+        });
+    }
+
+    /**
+     * 不带参 图片上传
+     * @param url
+     *
+     * @param data  通过new JSONObject(Map<String,String> imgs)：key->标识   val->图片file路径
+     * @param netCallBack
+     */
+    public void onUpImage(String url, JSONObject data, NetCallBack netCallBack){
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        if (data != null){
+            Iterator<String> keys = data.keys();
+            while(keys.hasNext()){
+                File file = null;
+                try{
+                    String key = keys.next();
+                    file = new File(data.getString(key));
+                    builder.addFormDataPart(key,file.getAbsolutePath(),RequestBody.create(MediaType.get("multipart/form-data"),file));
+                }catch ( JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        builder.setType(MultipartBody.FORM);
+        MultipartBody multipartBody = builder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(multipartBody)
+                .build();
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                netCallBack.onFailure(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                netCallBack.onSucceed(response);
+            }
+        });
+    }
+    /**
+     * 异步GET请求
+     * @param url
+     * @param netCallBack
+     * @return
+     */
+    public static void getAsyncGET(String url,NetCallBack netCallBack){
+        getInstance().onAsyncGET(url,netCallBack);
+    }
+
+
+    /**
+     * 同步GET请求
+     * @param url
+     * @param netCallBack
+     * @return
+     */
+    public static void getSyncGET(String url,NetCallBack netCallBack) throws IOException {
+        getInstance().onSyncGet(url,netCallBack);
+    }
+
+    /**
+     * 同步POST请求 无  headers
+     * @param url
+     * @param bodyParams
+     * @return
+     * @throws IOException
+     */
+    public static Response getSyncPOST_Body(String url,Map<String,String> bodyParams) throws IOException {
+        return getInstance().onSyncPOST_Body(url,bodyParams);
+    }
+    /**
+     * 同步POST请求 有 headers
+     * @param url
+     * @param bodyParams
+     * @return
+     * @throws IOException
+     */
+    public static Response getSyncPOST_BodyAndHeaders(String url,Map<String,String> bodyParams,Map<String,String> headersParams) throws IOException {
+        return getInstance().onSyncPOST_BodyAndHeader(url,bodyParams,headersParams);
+    }
+
+    /**
+     * 异步post 无headers
+     * @param url
+     * @param bodyParams
+     * @param netCallBack
+     */
+
+    public static void getAsyncPostBody(String url,Map<String,String> bodyParams,NetCallBack netCallBack){
+        getInstance().onAsyncPOST_Body(url,bodyParams,netCallBack);
+
+    }
+
+    /**
+     * 异步post 有headers
+     * @param url
+     * @param bodyParams
+     * @param netCallBack
+     */
+
+    public static void getAsyncPostBodyHeaders(String url,Map<String,String> bodyParams,Map<String,String> headersParams,NetCallBack netCallBack){
+        getInstance().onAsyncPOST_BodyAndHeaders(url,bodyParams,headersParams,netCallBack);
+    }
+
+    /**
+     *  判断是否联网
+     * @param context
+     * @return
+     */
+    public static boolean isNetWorkAvailable(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null){
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isConnected()){
+                if (networkInfo.getState() == NetworkInfo.State.CONNECTED){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
