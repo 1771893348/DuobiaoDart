@@ -3,11 +3,16 @@ package com.duobiao.mainframedart.game.local.hightscore;
 import android.app.Activity;
 
 import com.clj.fastble.data.BleDevice;
+import com.duobiao.mainframedart.ble.bean.DartsTable;
+import com.duobiao.mainframedart.ble.kit.BluetoothUtil;
 import com.duobiao.mainframedart.ble.kit.NewBluetoothLe;
 import com.duobiao.mainframedart.game.bean.DartBean;
 import com.duobiao.mainframedart.game.bean.PlayerBean;
 import com.duobiao.mainframedart.game.bean.RoundDarts;
 import com.duobiao.mainframedart.game.manager.LocalGameManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Author:Admin
@@ -23,6 +28,9 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
     private Activity mActivity;
     private static HightGamePresenter gameHightPresent;
     private static HightGameContract.view mIView;
+    private DartsTable mDartsTable;
+    HashMap<String, String> ScoreDict;//扇区对应表
+    ArrayList<DartBean> dartBeans;
     public HightGamePresenter(Activity activity){
         this.mActivity = activity;
     }
@@ -31,6 +39,7 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
             gameHightPresent = new HightGamePresenter(activity);
         }
         mIView = iView;
+
         iView.setPresenter(gameHightPresent);
     }
 
@@ -49,6 +58,17 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
         } else {
             onDisConnected(null);
         }
+        mDartsTable = BluetoothUtil.getDartsTable("DuobiaoDart");
+        if (mDartsTable != null){
+            ScoreDict = mDartsTable.getScoreDict();
+        }
+        dartBeans = new ArrayList<>();
+        for (String key:ScoreDict.keySet()) {
+            if (null != key && !key.equals("")){
+                dartBeans.add(LocalGameManager.createFromByte(key));
+            }
+        }
+        mIView.getDartBeans(dartBeans);
         currentRoundDarts = new RoundDarts();
     }
 
@@ -89,6 +109,7 @@ public class HightGamePresenter implements HightGameContract.presenter, NewBluet
         currentRoundDarts.getRoundDarts()[currentDartIndex] = dartBean;
         currentDartIndex++;
         mIView.showResult(playerBeans[currentPlayerIndex]);
+        mIView.blueMessage(message);
     }
 
     @Override

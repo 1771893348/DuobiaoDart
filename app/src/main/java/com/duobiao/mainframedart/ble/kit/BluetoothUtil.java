@@ -145,7 +145,10 @@ public class BluetoothUtil {
 		SampleGattAttributes.CLIENT_DUOBIAO_SOCKET_CHARACTERISTIC_CONFIG = dartsTable.getServiceUUID();
 		SampleGattAttributes.CLIENT_DUOBIAO_GATT_CHARACTERISTIC_CONFIG = dartsTable.getCharacteristicUUID().get(0);
 	}
-
+	public static DartsTable getDartsTable(String dartTargetName){
+		DartsTable dartsTable = dartsTables.get(dartTargetName);
+		return  dartsTable;
+	}
 	/**
 	 * 初始化已经知道的蓝牙设备数据
 	 * @param configInfo

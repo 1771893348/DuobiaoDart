@@ -15,7 +15,7 @@ public class LocalGameManager {
 
         DartBean g = new DartBean();
         g.turnDartBean(areaMark);
-
+        g.setDartBleString(blue);
         return g;
     }
 }

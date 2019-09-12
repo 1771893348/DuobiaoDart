@@ -11,6 +11,7 @@ import com.duobiao.mainframedart.base.BaseActivity;
 import com.duobiao.mainframedart.ble.activity.NewBleActivity;
 import com.duobiao.mainframedart.ble.kit.BluetoothUtil;
 import com.duobiao.mainframedart.game.local.LocalMainActivity;
+import com.duobiao.mainframedart.game.local.hightscore.HightGameActivity;
 import com.duobiao.mainframedart.permission.PermissionHelper;
 import com.duobiao.mainframedart.permission.PermissionInterface;
 import com.duobiao.mainframedart.util.Bugs;
@@ -76,8 +77,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //                Intent intent = new Intent();
 //                intent.setClass(MainActivity.this, NewBleActivity.class);
 //                startActivity(intent);
+
+//                Intent intent = new Intent();
+//                intent.setClass(MainActivity.this, LocalMainActivity.class);
+//                startActivity(intent);
+
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, LocalMainActivity.class);
+                intent.setClass(MainActivity.this, HightGameActivity.class);
                 startActivity(intent);
                 break;
             case R.id.item_net_game:
